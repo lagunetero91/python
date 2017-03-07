@@ -5,6 +5,7 @@ except ImportError:
 	from tkinter import*
 	
 import tkinter.messagebox
+import socket
 	
 root = Tk()
 
@@ -14,8 +15,18 @@ def startConn():
 	if len(ip)>0 and len(port)>0:
 		cadena = "Ip: "+ip+" Puerto: "+port
 		tkinter.messagebox.showinfo("Información",cadena)
+		try:
+			connSocket = socket.socket()
+			connSocket.connect((ip,port))
+			tkinter.messagebox.showinfo("Información","Conexión establecida con "+ip+":"+port)
+		except:
+			tkinter.messagebox.showinfo("Información","Imposible establecer la conección.")
 	else:
 		tkinter.messagebox.showinfo("Información","Introduzca una ip y un puerto válidos.")
+
+#def endConn():
+
+
 
 #conection Frame
 window = Frame(root)
