@@ -15,7 +15,7 @@ def startConn():
 		cadena = "Ip: "+ip+" Puerto: "+port
 		tkinter.messagebox.showinfo("Información",cadena)
 	else:
-		tkinter.messagebox.showinfo("Información","Introduzca una ip y un puerto válidos")
+		tkinter.messagebox.showinfo("Información","Introduzca una ip y un puerto válidos.")
 
 #conection Frame
 window = Frame(root)
