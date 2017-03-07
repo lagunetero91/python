@@ -11,8 +11,11 @@ root = Tk()
 def startConn():
 	ip = ipCon.get()
 	port = portCon.get()
-	cadena = "Ip: "+ip+" Puerto: "+port
-	tkinter.messagebox.showinfo("Información",cadena)
+	if len(ip)>0 and len(port)>0:
+		cadena = "Ip: "+ip+" Puerto: "+port
+		tkinter.messagebox.showinfo("Información",cadena)
+	else:
+		tkinter.messagebox.showinfo("Información","Introduzca una ip y un puerto válidos")
 
 #conection Frame
 window = Frame(root)
