@@ -5,6 +5,7 @@ except ImportError:
 	from tkinter import*
 	
 
+	
 root = Tk()
 
 #conection Frame
@@ -12,16 +13,19 @@ window = Frame(root)
 Label(window,text="Datos de conexión")
 window.pack()
 
-Label(window,text="IP").grid(row=0)
+Label(window,text="IP: ").grid(row=0)
 ipCon = Entry(window)
 ipCon.grid(row=0,column=1)
+Label(window,text="Puerto: ").grid(row=0,column=2,padx=5)
+portCon = Entry(window)
+portCon.grid(row=0,column=3,padx=5)
 conButton = Button(window,text="Conectar").grid(row=1,column=0,padx=5,pady=10)
 endConButton = Button(window,text="Cerrar conexión").grid(row=1,column=3,padx=5,pady=10)
 
 #Data Box
-text = Frame(root)
-text.pack()
-inText = Text(text,height=4).pack()
+sendText = Frame(root)
+sendText.pack()
+inText = Text(sendText,height=4,width=35,padx=5).pack()
 
 
 send = Frame(root)
