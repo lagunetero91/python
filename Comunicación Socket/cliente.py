@@ -17,7 +17,7 @@ def startConn():
 		tkinter.messagebox.showinfo("Información",cadena)
 		try:
 			connSocket = socket.socket()
-			connSocket.connect((ip,port))
+			connSocket.connect((str(ip),int(port)))
 			tkinter.messagebox.showinfo("Información","Conexión establecida con "+ip+":"+port)
 		except:
 			tkinter.messagebox.showinfo("Información","Imposible establecer la conección.")

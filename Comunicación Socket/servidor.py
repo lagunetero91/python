@@ -15,16 +15,17 @@ def startServer():
 	if len(ip)>0 and len(port)>0:
 		cadena = "Ip: "+ip+" Puerto: "+port
 		tkinter.messagebox.showinfo("Información",cadena)
-		#try:
-		
-		connSocket = socket.socket()
-		connSocket.bind((ip,int(port)))
-		print(port)
-		print(int(port))
-		tkinter.messagebox.showinfo("Información","Conexión establecida con "+ip+":"+port)
-		connSocket.listen(1)
-		#except:
-		#	tkinter.messagebox.showinfo("Información","Imposible establecer la conección.")
+		try:
+			connSocket = socket.socket()
+			connSocket.bind((str(ip),int(port)))
+			#connSocket.bind(("localhost",1111))
+			
+			tkinter.messagebox.showinfo("Información","Conexión establecida con "+ip+":"+port)
+			connSocket.listen(1)
+			conn,addr = connSocket.accept()
+			print("Connection from: " + str(addr))
+		except:
+			tkinter.messagebox.showinfo("Información","Imposible establecer la conección.")
 	else:
 		tkinter.messagebox.showinfo("Información","Introduzca una ip y un puerto válidos.")
 
