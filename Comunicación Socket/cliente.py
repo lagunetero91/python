@@ -4,9 +4,15 @@ try:
 except ImportError:
 	from tkinter import*
 	
-
+import tkinter.messagebox
 	
 root = Tk()
+
+def startConn():
+	ip = ipCon.get()
+	port = portCon.get()
+	cadena = "Ip: "+ip+" Puerto: "+port
+	tkinter.messagebox.showinfo("Información",cadena)
 
 #conection Frame
 window = Frame(root)
@@ -19,7 +25,7 @@ ipCon.grid(row=0,column=1)
 Label(window,text="Puerto: ").grid(row=0,column=2,padx=5)
 portCon = Entry(window)
 portCon.grid(row=0,column=3,padx=5)
-conButton = Button(window,text="Conectar").grid(row=1,column=0,padx=5,pady=10)
+conButton = Button(window,text="Conectar",command=startConn).grid(row=1,column=0,padx=5,pady=10)
 endConButton = Button(window,text="Cerrar conexión").grid(row=1,column=3,padx=5,pady=10)
 
 #Data Box
