@@ -24,8 +24,8 @@ def startConn():
 	else:
 		tkinter.messagebox.showinfo("Información","Introduzca una ip y un puerto válidos.")
 
-#def endConn():
-
+def endConn():
+	connSocket.close()
 
 
 #conection Frame
@@ -40,7 +40,7 @@ Label(window,text="Puerto: ").grid(row=0,column=2,padx=5)
 portCon = Entry(window)
 portCon.grid(row=0,column=3,padx=5)
 conButton = Button(window,text="Conectar",command=startConn).grid(row=1,column=0,padx=5,pady=10)
-endConButton = Button(window,text="Cerrar conexión").grid(row=1,column=3,padx=5,pady=10)
+endConButton = Button(window,text="Cerrar conexión",command=endConn).grid(row=1,column=3,padx=5,pady=10)
 
 #Data Box
 sendText = Frame(root)
