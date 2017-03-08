@@ -37,6 +37,9 @@ def sendData():
 	tkinter.messagebox.showinfo("Información enviada: ",inText.get(1.0,END))
 	connSocket.send(inText.get(1.0,END).encode())
 
+def clearData():
+	inText.delete(1.0,END)
+	
 #conection Frame
 window = Frame(root)
 Label(window,text="Datos de conexión")
@@ -61,5 +64,5 @@ inText.pack()
 send = Frame(root)
 send.pack()
 sendButton = Button(send,text="Enviar",command=sendData).grid(row=1,column=0,padx=5,pady=10)
-clearConButton = Button(send,text="Limpiar").grid(row=1,column=3,padx=5,pady=10)
+clearConButton = Button(send,text="Limpiar",command=clearData).grid(row=1,column=3,padx=5,pady=10)
 window.mainloop()
