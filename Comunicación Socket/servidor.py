@@ -6,7 +6,7 @@ except ImportError:
 	
 import tkinter.messagebox
 import socket
-	
+import time
 root = Tk()
 
 def startServer():
@@ -15,17 +15,28 @@ def startServer():
 	if len(ip)>0 and len(port)>0:
 		cadena = "Ip: "+ip+" Puerto: "+port
 		tkinter.messagebox.showinfo("Información",cadena)
-		try:
-			connSocket = socket.socket()
-			connSocket.bind((str(ip),int(port)))
-			#connSocket.bind(("localhost",1111))
+		#try:
+		connSocket = socket.socket()
+		connSocket.bind((str(ip),int(port)))
 			
-			tkinter.messagebox.showinfo("Información","Conexión establecida con "+ip+":"+port)
-			connSocket.listen(1)
-			conn,addr = connSocket.accept()
-			print("Connection from: " + str(addr))
-		except:
-			tkinter.messagebox.showinfo("Información","Imposible establecer la conección.")
+		tkinter.messagebox.showinfo("Información","Conexión establecida con "+ip+":"+port)
+		connSocket.listen(1)
+		conn,addr = connSocket.accept()
+		inText.configure(state='normal')
+		inText.insert(INSERT,"Conexión establecida con: "+ str(addr)+"\n")
+		inText.configure(state='disable')
+		time.sleep(5)	
+		
+		while True:
+			data = conn.recv(1024).decode()
+			if not data:
+				break
+			data = conn.recv(1024).decode()
+			inText.configure(state='normal')
+			inText.insert(CURRENT,str(data)+"\n")
+			inText.configure(state='disable')
+		#except:
+		#	tkinter.messagebox.showinfo("Información","Imposible establecer la conección.")
 	else:
 		tkinter.messagebox.showinfo("Información","Introduzca una ip y un puerto válidos.")
 
@@ -49,7 +60,7 @@ closeServerButton = Button(window,text="Cerrar servidor",command=closeServer).gr
 #Data Box
 recvText = Frame(root)
 recvText.pack()
-inText = Text(recvText,height=4,width=35,padx=5).pack()
-
+inText = Text(recvText,height=4,width=35,padx=5)
+inText.pack()
 
 window.mainloop()
