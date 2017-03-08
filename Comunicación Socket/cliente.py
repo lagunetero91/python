@@ -9,6 +9,7 @@ import socket
 
 connSocket = socket.socket()	
 root = Tk()
+root.title("Cliente")
 
 def startConn():
 	global connSocket
@@ -33,7 +34,7 @@ def endConn():
 def sendData():
 	global connSocket
 	
-	tkinter.messagebox.showinfo("Información",inText.get(1.0,END))
+	tkinter.messagebox.showinfo("Información enviada: ",inText.get(1.0,END))
 	connSocket.send(inText.get(1.0,END).encode())
 
 #conection Frame

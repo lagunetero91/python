@@ -8,35 +8,31 @@ import tkinter.messagebox
 import socket
 import time
 root = Tk()
-
+root.title("Servidor")
 def startServer():
 	ip = ipCon.get()
 	port = portCon.get()
 	if len(ip)>0 and len(port)>0:
 		cadena = "Ip: "+ip+" Puerto: "+port
 		tkinter.messagebox.showinfo("Información",cadena)
-		#try:
-		connSocket = socket.socket()
-		connSocket.bind((str(ip),int(port)))
+		try:
+			connSocket = socket.socket()
+			connSocket.bind((str(ip),int(port)))
 			
-		tkinter.messagebox.showinfo("Información","Conexión establecida con "+ip+":"+port)
-		connSocket.listen(1)
-		conn,addr = connSocket.accept()
-		inText.configure(state='normal')
-		inText.insert(INSERT,"Conexión establecida con: "+ str(addr)+"\n")
-		inText.configure(state='disable')
-		time.sleep(5)	
+			tkinter.messagebox.showinfo("Información","Conexión establecida con "+ip+":"+port)
+			connSocket.listen(1)
+			conn,addr = connSocket.accept()
+			inText.insert(INSERT,"Conexión establecida con: "+ str(addr)+"\n")
+			print("Conexión establecida con: "+ str(addr)+"\n")	
 		
-		while True:
-			data = conn.recv(1024).decode()
-			if not data:
-				break
-			data = conn.recv(1024).decode()
-			inText.configure(state='normal')
-			inText.insert(CURRENT,str(data)+"\n")
-			inText.configure(state='disable')
-		#except:
-		#	tkinter.messagebox.showinfo("Información","Imposible establecer la conección.")
+			while True:
+				data = conn.recv(1024).decode()
+				if not data:
+					break
+				inText.insert(CURRENT,str(data)+"\n")
+				print(str(data)+"\n")
+		except:
+			tkinter.messagebox.showinfo("Información","Imposible establecer la conección.")
 	else:
 		tkinter.messagebox.showinfo("Información","Introduzca una ip y un puerto válidos.")
 
