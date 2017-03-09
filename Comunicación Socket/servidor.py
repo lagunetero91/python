@@ -9,7 +9,9 @@ import socket
 import time
 root = Tk()
 root.title("Servidor")
+
 def startServer():
+	global inText
 	ip = ipCon.get()
 	port = portCon.get()
 	if len(ip)>0 and len(port)>0:
