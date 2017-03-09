@@ -23,7 +23,7 @@ def startConn():
 			connSocket.connect((str(ip),int(port)))
 			tkinter.messagebox.showinfo("Información","Conexión establecida con "+ip+":"+port)
 		except:
-			tkinter.messagebox.showinfo("Información","Imposible establecer la conección.")
+			tkinter.messagebox.showinfo("Información","Imposible establecer la conexión.")
 	else:
 		tkinter.messagebox.showinfo("Información","Introduzca una ip y un puerto válidos.")
 
