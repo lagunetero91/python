@@ -20,9 +20,9 @@ def startServer():
 		try:
 			connSocket = socket.socket()
 			connSocket.bind((str(ip),int(port)))
-			
 			tkinter.messagebox.showinfo("Información","Conexión establecida con "+ip+":"+port)
 			connSocket.listen(1)
+			connSocket.setblocking(0)
 			conn,addr = connSocket.accept()
 			inText.insert(INSERT,"Conexión establecida con: "+ str(addr)+"\n")
 			print("Conexión establecida con: "+ str(addr)+"\n")	
