@@ -22,15 +22,17 @@ def chooseImage():
    
 
 def saveImage():
+    global outI
     savefile = tkinter.filedialog.asksaveasfile(mode='w',defaultextension=".jpg")
     if savefile:    #Comprueba si se le dío a cancelar.
-        image.save(savefile)
+        outI.save(savefile)
 
 def aplyFilter():
     global acI
+    global outI
     auxiliarImg = acI
     showIm = ImageOps.invert(auxiliarImg)
-    
+    outI=showIm
     tkimageout2 = ImageTk.PhotoImage(showIm)			#Mostrar imagen
     panel2.configure(image = tkimageout2)
     panel2.image = tkimageout2
@@ -40,6 +42,7 @@ window = tkinter.Frame(root)
 window.pack()
 inImage = Image.open("intro.jpg")#Abrir Imagen
 acI = inImage
+outI = inImage
 inImage.thumbnail(size, Image.ANTIALIAS)		#Cambia el tamaño de la imagen
 tkimage = ImageTk.PhotoImage(inImage)			#Mostrar imagen
 panel = tkinter.Label(window, image=tkimage)
@@ -51,5 +54,5 @@ panel2 = tkinter.Label(window, image=tkimageout)
 panel2.grid(row=0,column=1)
 chooseButton = tkinter.Button(window,text="Selecionar Imagen",command=chooseImage).grid(row=1,column=0)
 saveButton = tkinter.Button(window,text="Guadar Imagen",command=saveImage).grid(row=1,column=1)
-filerButton = tkinter.Button(window,text="Aplicar Filtro",command=aplyFilter).grid(row=2,column=0)
+filerButton = tkinter.Button(window,text="Aplicar Filtro",command=aplyFilter).grid(row=2,column=0,pady= 30)
 root.mainloop()
