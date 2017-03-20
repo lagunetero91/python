@@ -34,11 +34,16 @@ def aplyFilter():
     global acI
     global outI
     auxiliarImg = acI
-    showIm = ImageOps.invert(auxiliarImg)
-    outI=showIm
-    tkimageout2 = ImageTk.PhotoImage(showIm)			#Mostrar imagen
-    panel2.configure(image = tkimageout2)
-    panel2.image = tkimageout2
+    filter = tkvar.get()
+    print(filter)
+    if filter == 'Invertir color' :
+        showIm = ImageOps.invert(auxiliarImg)
+        outI=showIm
+        tkimageout2 = ImageTk.PhotoImage(showIm)			#Mostrar imagen
+        panel2.configure(image = tkimageout2)
+        panel2.image = tkimageout2
+    else:
+        print("nothing")
 
 root.geometry(window_size)
 window = tkinter.Frame(root)
