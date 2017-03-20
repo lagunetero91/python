@@ -14,3 +14,9 @@ la interfaz gráfica de los dos se está utilizando la librería Tkinter de Pyth
   Permite conectarnos a un servidor TCP especificando su IP y puerto.
   Una vez conectados podemos enviar datos indefinidamente hacía el servidor
 mediante un cuadro de texto.
+
+###### Tratamiento de imágenes #######
+  Este trabajo consiste en un programa capaz de cargar una imágen seleccionada mediante
+un dialógo por el usuario, a la cual se le podrán aplicar una serie de filtros y luego guardar
+el resultado en el directorio especificado por el usuario.
+
