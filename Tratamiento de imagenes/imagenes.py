@@ -35,11 +35,12 @@ def saveImage():
 def aplyFilter():
     global acI
     global outI
-    auxiliarImg = acI
+    auxiliarImg = copy(acI)
     filter = tkvar.get()
     if filter == 'Invertir color' :
         showIm = ImageOps.invert(auxiliarImg)
-        outI=showIm
+        outI=copy(showIm)
+        showIm.thumbnail(size, Image.ANTIALIAS)
         tkimageout2 = ImageTk.PhotoImage(showIm)			#Mostrar imagen
         panel2.configure(image = tkimageout2)
         panel2.image = tkimageout2
@@ -49,7 +50,8 @@ def aplyFilter():
         panel2.image = tkimageout2
     elif filter == 'Escala de grises':
         showIm = acI.convert("L")
-        outI=showIm
+        outI=copy(showIm)
+        showIm.thumbnail(size, Image.ANTIALIAS)
         tkimageout2 = ImageTk.PhotoImage(showIm)			#Mostrar imagen
         panel2.configure(image = tkimageout2)
         panel2.image = tkimageout2
