@@ -1,7 +1,7 @@
 import os, sys
 from tkinter import*
 import tkinter.filedialog
-
+from copy import copy
 from PIL import Image, ImageTk,ImageFilter,ImageOps
 
 window_size= "640x480"      #Tamaño de la ventana del programa.
@@ -16,13 +16,13 @@ tkvar.set('Invertir color')
 def chooseImage():
     global acI
     filename =tkinter.filedialog.askopenfilename()
-    print(filename)
     inImage2 = Image.open(filename)				#Abrir Imagen
+    acI = copy(inImage2)
     inImage2.thumbnail(size, Image.ANTIALIAS)		#Cambia el tamaño de la imagen
     tkimage2 = ImageTk.PhotoImage(inImage2)			#Mostrar imagen
     panel.configure(image = tkimage2)
     panel.image = tkimage2
-    acI = inImage2
+    
    
 #Método encargado de guardar la imagen procesada.
 def saveImage():
@@ -44,7 +44,7 @@ def aplyFilter():
         panel2.configure(image = tkimageout2)
         panel2.image = tkimageout2
     elif filter == 'Normal':
-        tkimageout2 = ImageTk.PhotoImage(acI)			#Mostrar imagen
+        tkimageout2 = ImageTk.PhotoImage(acI)			        #Mostrar imagen
         panel2.configure(image = tkimageout2)
         panel2.image = tkimageout2
     elif filter == 'Escala de grises':
@@ -57,18 +57,20 @@ def aplyFilter():
 root.geometry(window_size)
 window = tkinter.Frame(root)
 window.pack()
-inImage = Image.open("intro.jpg")                       #Abrir Imagen por defecto de la entrada.
-acI = inImage
-outI = inImage
+inImage = Image.open("intro.jpg")                      #Abrir Imagen por defecto de la entrada.
+acI = copy(inImage)
+print(id(acI))
+outI = copy(inImage)
+print(id(outI))
 inImage.thumbnail(size, Image.ANTIALIAS)		#Cambia el tamaño de la imagen
 tkimage = ImageTk.PhotoImage(inImage)			#Mostrar imagen
-panel = tkinter.Label(window, image=tkimage)
+panel = tkinter.Label(window, image=tkimage,width=256,height=256)
 panel.grid(row=0)
 
 outputimage = Image.open("result.jpg")			#Abrir Imagen por defecto de la salida.
 outputimage.thumbnail(size, Image.ANTIALIAS)		#Cambia el tamaño de la imagen
 tkimageout = ImageTk.PhotoImage(outputimage)
-panel2 = tkinter.Label(window, image=tkimageout)
+panel2 = tkinter.Label(window, image=tkimageout,width=256,height=256)
 panel2.grid(row=0,column=2)
 
 chooseButton = tkinter.Button(window,text="Selecionar Imagen",command=chooseImage).grid(row=1,column=0,pady=8)      #Botón de carga de imágenes
