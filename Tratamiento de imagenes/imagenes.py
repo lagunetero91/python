@@ -75,7 +75,7 @@ def negativeImage(aux):
 root.geometry(window_size)
 window = tkinter.Frame(root)
 window.pack()
-inImage = Image.open("intro.jpg")                      #Abrir Imagen por defecto de la entrada.
+inImage = Image.open("Imagenes/intro.jpg")                      #Abrir Imagen por defecto de la entrada.
 acI = copy(inImage)
 outI = copy(inImage)
 inImage.thumbnail(size, Image.ANTIALIAS)		#Cambia el tamaño de la imagen
@@ -83,7 +83,7 @@ tkimage = ImageTk.PhotoImage(inImage)			#Mostrar imagen
 panel = tkinter.Label(window, image=tkimage,width=256,height=256)
 panel.grid(row=0)
 
-outputimage = Image.open("result.jpg")			#Abrir Imagen por defecto de la salida.
+outputimage = Image.open("Imagenes/result.jpg")			#Abrir Imagen por defecto de la salida.
 outputimage.thumbnail(size, Image.ANTIALIAS)		#Cambia el tamaño de la imagen
 tkimageout = ImageTk.PhotoImage(outputimage)
 panel2 = tkinter.Label(window, image=tkimageout,width=256,height=256)
