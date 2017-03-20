@@ -20,4 +20,3 @@ mediante un cuadro de texto.
 un dialógo por el usuario, a la cual se le podrán aplicar una serie de filtros y luego guardar
 el resultado en el directorio especificado por el usuario.
 
-https://github.com/lagunetero91/python/blob/master/Tratamiento%20de%20imagenes/UI.jpg
