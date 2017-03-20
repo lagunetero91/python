@@ -7,7 +7,7 @@ from PIL import Image, ImageTk,ImageFilter,ImageOps
 window_size= "640x480"      #Tamaño de la ventana del programa.
 size = 256, 256             #Tamaño de las miniaturas de las imágenes.
 
-filters = {'Invertir color', 'Normal','Escala de grises'}      #ComboBox: Filtros
+filters = {'Invertir color', 'Normal','Escala de grises','Negativo'}      #ComboBox: Filtros
 root = tkinter.Tk()
 tkvar = StringVar(root)
 tkvar.set('Invertir color')
@@ -55,15 +55,29 @@ def aplyFilter():
         tkimageout2 = ImageTk.PhotoImage(showIm)			#Mostrar imagen
         panel2.configure(image = tkimageout2)
         panel2.image = tkimageout2
+    elif filter == 'Negativo':
+        showIm = negativeImage(auxiliarImg)
+        outI=copy(showIm)
+        showIm.thumbnail(size, Image.ANTIALIAS)
+        tkimageout2 = ImageTk.PhotoImage(showIm)			#Mostrar imagen
+        panel2.configure(image = tkimageout2)
+        panel2.image = tkimageout2
 
+        
+def negativeImage(aux):
+    width, height = aux.size
+    for i in range(width):
+        for j in range(height):
+            r, g, b = aux.getpixel((i,j))
+            aux.putpixel((i,j),(255-r,255-g,255-b))
+    return aux
+        
 root.geometry(window_size)
 window = tkinter.Frame(root)
 window.pack()
 inImage = Image.open("intro.jpg")                      #Abrir Imagen por defecto de la entrada.
 acI = copy(inImage)
-print(id(acI))
 outI = copy(inImage)
-print(id(outI))
 inImage.thumbnail(size, Image.ANTIALIAS)		#Cambia el tamaño de la imagen
 tkimage = ImageTk.PhotoImage(inImage)			#Mostrar imagen
 panel = tkinter.Label(window, image=tkimage,width=256,height=256)
