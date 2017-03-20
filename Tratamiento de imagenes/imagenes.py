@@ -6,8 +6,11 @@ from PIL import Image, ImageTk,ImageFilter,ImageOps
 
 window_size= "640x480"
 size = 256, 256
-root = tkinter.Tk()
 
+filters = {'Invertir color', 'Normal'}
+root = tkinter.Tk()
+tkvar = StringVar(root)
+tkvar.set('Invertir color')
 
 def chooseImage():
     global acI
@@ -54,5 +57,6 @@ panel2 = tkinter.Label(window, image=tkimageout)
 panel2.grid(row=0,column=1)
 chooseButton = tkinter.Button(window,text="Selecionar Imagen",command=chooseImage).grid(row=1,column=0)
 saveButton = tkinter.Button(window,text="Guadar Imagen",command=saveImage).grid(row=1,column=1)
-filerButton = tkinter.Button(window,text="Aplicar Filtro",command=aplyFilter).grid(row=2,column=0,pady= 30)
+filterMenu = OptionMenu(window,tkvar,*filters).grid(row=2,column=0)
+filerButton = tkinter.Button(window,text="Aplicar Filtro",command=aplyFilter).grid(row=2,column=1,pady= 30)
 root.mainloop()
