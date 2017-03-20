@@ -42,8 +42,10 @@ def aplyFilter():
         tkimageout2 = ImageTk.PhotoImage(showIm)			#Mostrar imagen
         panel2.configure(image = tkimageout2)
         panel2.image = tkimageout2
-    else:
-        print("nothing")
+    elif filter == 'Normal':
+        tkimageout2 = ImageTk.PhotoImage(acI)			#Mostrar imagen
+        panel2.configure(image = tkimageout2)
+        panel2.image = tkimageout2
 
 root.geometry(window_size)
 window = tkinter.Frame(root)
