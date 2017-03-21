@@ -8,9 +8,10 @@ from PIL import Image, ImageTk,ImageFilter,ImageOps
 
 window_size= "640x480"      #Tamaño de la ventana del programa.
 size = 256, 256             #Tamaño de las miniaturas de las imágenes.
-
+color = "grey"
 filters = {'Invertir color', 'Normal','Escala de grises','Negativo'}      #ComboBox: Filtros
 root = tkinter.Tk()
+root.title("pyImageFiltering")
 tkvar = StringVar(root)
 tkvar.set('Invertir color')
 
@@ -67,7 +68,7 @@ def aplyFilter():
         panel2.configure(image = tkimageout2)
         panel2.image = tkimageout2
 
-        
+#Método que pone la imágen en negativo.       
 def negativeImage(aux):
     width, height = aux.size
     for i in range(width):
@@ -76,13 +77,36 @@ def negativeImage(aux):
             aux.putpixel((i,j),(255-r,255-g,255-b))
     return aux
 
+#Método que recoge el color especificado en el botón.
 def getColor():
+    global color
     color = tkinter.colorchooser.askcolor()
-    print(color)
     colorButton.configure(bg=color[1])
 
+#Método encargado de aplicar el filtro de color a la imágen.
 def aplyColorFilter():
-    print("En proceso de implementación")
+    global color
+    global acI
+    global outI
+    nr,ng,nb = color[0]
+    width, height = acI.size
+    showImg = copy(acI)
+    showImg.convert("L")
+    for i in range(width):
+        for j in range(height):
+            r, g, b = showImg.getpixel((i,j))
+            media =(r+g+b)/3
+            if media < 128:
+                showImg.putpixel((i,j),((int)(nr*media/128),(int)(ng*media/128),(int)(nb*media/128)))
+            else:
+                showImg.putpixel((i,j),((int)(nr+(255-nr)*(media-128)/128),(int)(ng+(255-ng)*(media-128)/128),(int)(nb+(255-nb)*(media-128)/128)))
+    outI=copy(showImg)
+    showImg.thumbnail(size, Image.ANTIALIAS)
+    tkimageout2 = ImageTk.PhotoImage(showImg)			#Mostrar imagen
+    panel2.configure(image = tkimageout2)
+    panel2.image = tkimageout2
+
+            
 
 root.geometry(window_size)
 window = tkinter.Frame(root)
