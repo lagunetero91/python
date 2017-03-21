@@ -1,8 +1,10 @@
 import os, sys
 from tkinter import*
 import tkinter.filedialog
+import tkinter.colorchooser
 from copy import copy
 from PIL import Image, ImageTk,ImageFilter,ImageOps
+
 
 window_size= "640x480"      #Tamaño de la ventana del programa.
 size = 256, 256             #Tamaño de las miniaturas de las imágenes.
@@ -45,6 +47,8 @@ def aplyFilter():
         panel2.configure(image = tkimageout2)
         panel2.image = tkimageout2
     elif filter == 'Normal':
+        showIm =copy(acI)
+        showIm.thumbnail(size, Image.ANTIALIAS)
         tkimageout2 = ImageTk.PhotoImage(acI)			        #Mostrar imagen
         panel2.configure(image = tkimageout2)
         panel2.image = tkimageout2
@@ -71,7 +75,12 @@ def negativeImage(aux):
             r, g, b = aux.getpixel((i,j))
             aux.putpixel((i,j),(255-r,255-g,255-b))
     return aux
-        
+
+def getColor():
+    color = tkinter.colorchooser.askcolor()
+    print(color)
+    colorButton.configure(bg=color[1])
+    
 root.geometry(window_size)
 window = tkinter.Frame(root)
 window.pack()
@@ -91,7 +100,12 @@ panel2.grid(row=0,column=2)
 
 chooseButton = tkinter.Button(window,text="Selecionar Imagen",command=chooseImage).grid(row=1,column=0,pady=8)      #Botón de carga de imágenes
 saveButton = tkinter.Button(window,text="Guadar Imagen",command=saveImage).grid(row=1,column=2)                     #Botón para guardar imágenes
+
 Label(window,text="Seleccione filtro: ").grid(row=2,column=0)
 filterMenu = OptionMenu(window,tkvar,*filters).grid(row=2,column=1)                                                 #ComboBox
 filerButton = tkinter.Button(window,text="Aplicar Filtro",command=aplyFilter).grid(row=2,column=2,pady= 30)         #Botón que aplica el filtro seleccionado por el ComboBox
+
+Label(window,text="Seleccione color del filtro: ").grid(row=3,column=0)
+colorButton = tkinter.Button(window,text="Color",command=getColor,bg = "white")
+colorButton.grid(row=3,column=1)
 root.mainloop()
