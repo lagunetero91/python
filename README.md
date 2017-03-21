@@ -21,3 +21,6 @@ un dialógo por el usuario, a la cual se le podrán aplicar una serie de filtros
 el resultado en el directorio especificado por el usuario.
 
 ![User Interfaze](https://github.com/lagunetero91/python/blob/master/Tratamiento%20de%20imagenes/UI.jpg)
+
+Versión de Python 3.6
+Librerias necesarias: Tkinter, Pillow.
