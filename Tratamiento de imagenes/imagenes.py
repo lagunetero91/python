@@ -80,7 +80,10 @@ def getColor():
     color = tkinter.colorchooser.askcolor()
     print(color)
     colorButton.configure(bg=color[1])
-    
+
+def aplyColorFilter():
+    print("En proceso de implementación")
+
 root.geometry(window_size)
 window = tkinter.Frame(root)
 window.pack()
@@ -108,4 +111,6 @@ filerButton = tkinter.Button(window,text="Aplicar Filtro",command=aplyFilter).gr
 Label(window,text="Seleccione color del filtro: ").grid(row=3,column=0)
 colorButton = tkinter.Button(window,text="Color",command=getColor,bg = "white")
 colorButton.grid(row=3,column=1)
+AplyColorFilterButton = tkinter.Button(window,text="Aplicar color",command=aplyColorFilter).grid(row=3,column=2)
+
 root.mainloop()
